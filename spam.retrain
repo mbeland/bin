@@ -1,0 +1,6 @@
+#!/bin/bash
+for i in $( ls /var/spool/mail/matt@rearviewmirror.org/Mail/.Spam/cur ); do
+  /usr/bin/dspam --client --mode=teft --class=spam --source=error --user matt@rearviewmirror.org < $i && rm $i
+done
+
+
