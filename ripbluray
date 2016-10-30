@@ -1,0 +1,34 @@
+#!/bin/bash
+WORK_DIR="/tmp/"
+OUTPUT_DIR="/mnt/media/Movies/"
+SOURCE_DRIVE="/dev/sr0"
+HANDBRAKE_PRESET="AppleTV 2"
+EXTENSION="mkv"
+LOG_DIR="/mnt/media/tempfiles/Movies/Logs/"
+LOG="movies.txt"
+function rip_bluray() {
+# Use the disc title
+ BLURAY_TITLE=$(blkid -o value -s LABEL $SOURCE_DRIVE)
+ # Replace spaces with underscores
+ BLURAY_TITLE=${BLURAY_TITLE// /_}
+# Backup the DVD to hard drive
+ makemkvcon backup disc:0 $WORK_DIR$BLURAY_TITLE --decrypt
+ eject $SOURCE_DRIVE
+# grep for the HandBrakeCLI process and get the PID
+ HANDBRAKE_PID=`ps aux|grep H\[a\]ndBrakeCLI`
+ set -- $HANDBRAKE_PID
+ HANDBRAKE_PID=$2
+# Wait until any existing Handbrake job is done
+ if [ -n "$HANDBRAKE_PID" ]
+ then
+ while [ -e /proc/$HANDBRAKE_PID ]; do sleep 1; done
+ fi
+# Encode
+ mkdir $OUTPUT_DIR/$BLURAY_TITLE
+ HandBrakeCLI -i $WORK_DIR$BLURAY_TITLE -o $OUTPUT_DIR$BLURAY_TITLE/$BLURAY_TITLE.$EXTENSION --preset=$HANDBRAKE_PRESET -s "1,2,3,4,5,6" > $LOG_DIR/$BLURAY_TITLE-HANDBRAKE.log
+ rm -R $WORK_DIR$BLURAY_TITLE
+# Write to log & send PushBullet notification so Mr. Thumbs can change the disc
+ noti -p -t "Finished ripping $BLURAY_TITLE" echo $BLURAY_TITLE >> $LOG_DIR/$LOG
+}
+rip_bluray
+
