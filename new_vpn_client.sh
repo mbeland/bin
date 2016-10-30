@@ -22,7 +22,7 @@ EOF
 CFILE=
 SERVER=
 PORT=
-while getopts “:hfzs:p:” OPTION
+while getopts ":hfzs:p:" OPTION
 do
 	case $OPTION in
 		h)
