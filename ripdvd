@@ -11,6 +11,12 @@ function rip_dvd() {
  DVD_TITLE=$(blkid -o value -s LABEL $SOURCE_DRIVE)
  # Replace spaces with underscores
  DVD_TITLE=${DVD_TITLE// /_}
+ if [ $DVD_TITLE == "DVD_VIDEO" ] 
+ then
+  echo -n "Movie title? "
+  read line
+  $DVD_TITLE = $line
+ fi
 # Backup the DVD to hard drive
  dvdbackup -i $SOURCE_DRIVE -o $WORK_DIR -M -n $DVD_TITLE > $LOG_DIR/$DVD_TITLE-DVDBACKUP.log
 
@@ -29,7 +35,7 @@ function rip_dvd() {
 # Encode
  mkdir $OUTPUT_DIR/$DVD_TITLE
  HandBrakeCLI -i $WORK_DIR/$DVD_TITLE --main-feature -o $OUTPUT_DIR/$DVD_TITLE/$DVD_TITLE.$EXTENSION --preset=$HANDBRAKE_PRESET -s "1,2,3,4,5,6" > $LOG_DIR/$DVD_TITLE-HANDBRAKE.log
- rm -R $WORK_DIR/$DVD_TITLE
+rm -R $WORK_DIR/$DVD_TITLE
 
  # Write to log & send PushBullet notification so Mr. Thumbs can change the disc
  noti -p -t "Finished ripping $DVD_TITLE" echo $DVD_TITLE >> $LOG_DIR/$LOG
