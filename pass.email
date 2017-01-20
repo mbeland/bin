@@ -7,6 +7,6 @@ elif [ $1 = "-h" ]; then
   exit 0
 else
   HASH=`python -c "import crypt; print crypt.crypt($2, "$6$")"`
-  /usr/bin/mysql -uroot -pfj4eOuWQTW14 -e"UPDATE mailserver.virtual_users SET password=('$HASH') WHERE email = '$1';"
+  /usr/bin/mysql -uroot -p -e"UPDATE mailserver.virtual_users SET password=('$HASH') WHERE email = '$1';"
   echo "Password updated."
 fi

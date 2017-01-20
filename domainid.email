@@ -2,6 +2,6 @@
 if [ $1 = "-h" ]; then
   echo "USAGE: ./domainid.email [domain]"
 else
-  DOMAINID=`/usr/bin/mysql -uroot -pfj4eOuWQTW14 -N -e"SELECT id FROM mailserver.virtual_domains WHERE name='$1';"`
+  DOMAINID=`/usr/bin/mysql -uroot -p -N -e"SELECT id FROM mailserver.virtual_domains WHERE name='$1';"`
   echo "Domain $1 has ID: $DOMAINID"
 fi
