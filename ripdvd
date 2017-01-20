@@ -15,7 +15,7 @@ function rip_dvd() {
  then
   echo -n "Movie title? "
   read line
-  $DVD_TITLE = $line
+  DVD_TITLE=$line
  fi
 # Backup the DVD to hard drive
  dvdbackup -i $SOURCE_DRIVE -o $WORK_DIR -M -n $DVD_TITLE > $LOG_DIR/$DVD_TITLE-DVDBACKUP.log
