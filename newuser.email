@@ -9,6 +9,6 @@ else
   HASH=`python -c 'import crypt; print crypt.crypt("$3")'`
   DOMAINID=`/usr/bin/mysql -uroot -p -N -e"SELECT id FROM mailserver.virtual_domains WHERE name='$2';"`
   EMAIL="$1@$2"
-  /usr/bin/mysql -uroot -pfj4eOuWQTW14 -e"INSERT INTO mailserver.virtual_users (domain_id, password, email) VALUES ('$DOMAINID', '$HASH', '$EMAIL');"
+  /usr/bin/mysql -uroot -p -e"INSERT INTO mailserver.virtual_users (domain_id, password, email) VALUES ('$DOMAINID', '$HASH', '$EMAIL');"
   echo "$EMAIL added to $2."
 fi

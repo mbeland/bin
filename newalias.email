@@ -7,7 +7,7 @@ elif [ $1 = "-h" ]; then
   echo "USAGE: ./newalias.email [source domain] [source user] [destination]"
   exit 0
 else
-  DOMAINID=`/usr/bin/mysql -uroot -pfj4eOuWQTW14 -N -e"SELECT id FROM mailserver.virtual_domains WHERE name='$1';"`
+  DOMAINID=`/usr/bin/mysql -uroot -p -N -e"SELECT id FROM mailserver.virtual_domains WHERE name='$1';"`
   EMAIL="$2@$1"
   /usr/bin/mysql -uroot -p -e"INSERT INTO mailserver.virtual_aliases (domain_id, source, destination) VALUES ('$DOMAINID', '$EMAIL', '$3');"
   echo "$EMAIL added to $1."

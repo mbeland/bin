@@ -4,9 +4,9 @@ if [ $1 = "-h" ]; then
 else
   HAM="ham@$1"
   SPAM="spam@$1"
-  /usr/bin/mysql -uroot -pfj4eOuWQTW14 -e"INSERT INTO mailserver.virtual_domains (name) VALUES ('$1');"
-  DOMAINID=`/usr/bin/mysql -uroot -pfj4eOuWQTW14 -N -e"SELECT id FROM mailserver.virtual_domains WHERE name='$1';"`
-  /usr/bin/mysql -uroot -pfj4eOuWQTW14 -e"INSERT INTO mailserver.virtual_dspam_aliases (domain_id, alias, pass) VALUES ('$DOMAINID', '$HAM', 'x');"
-  /usr/bin/mysql -uroot -pfj4eOuWQTW14 -e"INSERT INTO mailserver.virtual_dspam_aliases (domain_id, alias, pass) VALUES ('$DOMAINID', '$SPAM', 'x');"
+  /usr/bin/mysql -uroot -p -e"INSERT INTO mailserver.virtual_domains (name) VALUES ('$1');"
+  DOMAINID=`/usr/bin/mysql -uroot -p -N -e"SELECT id FROM mailserver.virtual_domains WHERE name='$1';"`
+  /usr/bin/mysql -uroot -p -e"INSERT INTO mailserver.virtual_dspam_aliases (domain_id, alias, pass) VALUES ('$DOMAINID', '$HAM', 'x');"
+  /usr/bin/mysql -uroot -p -e"INSERT INTO mailserver.virtual_dspam_aliases (domain_id, alias, pass) VALUES ('$DOMAINID', '$SPAM', 'x');"
   echo "Done."
 fi
