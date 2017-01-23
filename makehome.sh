@@ -13,4 +13,6 @@ mv .vimrc ~/
 mv .irssi ~/
 mv .git* ~/
 mv .repoList ~/
+cd ~
+rmdir skel/
 
