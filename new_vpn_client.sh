@@ -116,7 +116,7 @@ if [ $CFILE ] # if building single-file config
 else # if building multi-file config pkg
 	echo "ca ca.crt" >> /tmp/$CN.ovpn
 	echo "cert $CN.crt" >> /tmp/$CN.ovpn
-	echo "key $CN.crt" >> /tmp/$CN.ovpn
+	echo "key $CN.key" >> /tmp/$CN.ovpn
 fi
 echo "ns-cert-type server" >> /tmp/$CN.ovpn
 echo "comp-lzo" >> /tmp/$CN.ovpn
