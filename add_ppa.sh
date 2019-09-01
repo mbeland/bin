@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [ $# -eq 1 ]
 NM=`uname -a && date`
 NAME=`echo $NM | md5sum | cut -f1 -d" "`
