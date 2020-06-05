@@ -24,4 +24,4 @@ done
 git checkout -b ${new_branch}
 git branch -d master
 git pull origin ${new_branch}
-git branch --set-upstream-to=origin/${new_release}
+git branch --set-upstream-to=origin/${new_branch}
