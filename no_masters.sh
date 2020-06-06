@@ -24,7 +24,7 @@ while getopts ":n:h" opt; do
   esac
 done
 
-git checkout -b ${new_branch}
+git checkout -b "${new_branch}"
 git branch -d master
-git pull --ff-only origin ${new_branch}
-git branch --set-upstream-to=origin/${new_branch}
+git pull --ff-only origin "${new_branch}"
+git branch --set-upstream-to=origin/"${new_branch}"
