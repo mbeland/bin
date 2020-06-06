@@ -18,10 +18,13 @@ while getopts ":n:h" opt; do
       echo "Invalid option: $OPTARG requires an argument" 1>&2
       exit
       ;;
+    * )
+      echo "Using defaults..."
+      ;;
   esac
 done
 
 git checkout -b ${new_branch}
 git branch -d master
-git pull origin ${new_branch}
+git pull --ff-only origin ${new_branch}
 git branch --set-upstream-to=origin/${new_branch}
