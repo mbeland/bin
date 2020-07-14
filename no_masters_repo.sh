@@ -37,7 +37,7 @@ done
 
 if [ $a_flag -eq 0 ] 
 then
-  echo "You must specify a  repo location with -d; use -h for details"
+  echo "You must specify a repo location with -d; use -h for details"
   exit 2
 fi
 
